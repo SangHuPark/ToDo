@@ -17,7 +17,7 @@ module.exports = class Todo extends Sequelize.Model {
       },
     }, {
       sequelize,
-      timestamps: true,
+      timestamps: false,
       underscored: false,
       modelName: 'Todo',
       tableName: 'todolist',

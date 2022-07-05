@@ -9,20 +9,25 @@ module.exports = class User extends Sequelize.Model {
         unique: true,
       },
       user_pw: {
-        type: Sequelize.STRING(100),
-        allowNull: false,
-      },
-      user_name: {
         type: Sequelize.STRING(15),
         allowNull: false,
       },
+      user_name: {
+        type: Sequelize.STRING(10),
+        allowNull: false,
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.NOW,
+      }
     }, {
       sequelize,
-      timestamps: true,
+      timestamps: false,
       underscored: false,
       modelName: 'User',
       tableName: 'users',
-      paranoid: true,
+      paranoid: false,
       charset: 'utf8',
       collate: 'utf8_general_ci',
     });
