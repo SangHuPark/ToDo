@@ -2,7 +2,7 @@ const User = require('../models/user');
 const crypto = require('crypto');
 
 const enrollService = require('../service/enrollService.js');
-const util = require('../routes/makeReply.js');
+const util = require('../routes/function.js');
 
 exports.enroll = async (req, res, next) => {
     const {
@@ -21,16 +21,18 @@ exports.enroll = async (req, res, next) => {
         return res.json(util.makeReply(reply, false, 307, '닉네임은 최대 10자까지 가능합니다.'));
 
     try {
-        const idCheck = await enrollService.idOverlapCheck(user_id);
+        var idCheck = await enrollService.idOverlapCheck(user_id);
         if(idCheck) {
             return res.json(util.makeReply(reply, false, 301, '이미 사용 중인 아이디입니다.')); 
         }
-        const hashed_pw = crypto.createHash('sha512').update(user_pw).digest('base64');
-        const newUserInfo = [user_id, hashed_pw, user_name];
-        const enrollUser = await enrollService.insertUser(newUserInfo);
 
+        const hashed_pw = crypto.createHash('sha512').update(user_pw).digest('base64');
+        const newUserInfo = { user_id, hashed_pw, user_name };
+        const enrollUser = await enrollService.insertUser(newUserInfo);
+        
         return res.json(util.makeReply(reply, true, 200, '회원가입이 성공하였습니다.'));
     } catch (err) {
+        console.log(err);
         return res.status(500).send('Server error respose');
     }
 }
