@@ -1,10 +1,10 @@
-const User = require('../models/user');
+const User = require('../models/user.js');
 
-async function idOverlapCheck(user_id) {
+async function presentIdCheck(user_id) {
     User.findOne({ where : { user_id: user_id }})
         .then((data) => {
             return data;
-    });
+        });
 }
 
 async function insertUser(newUserInfo) {
@@ -28,6 +28,6 @@ async function insertUser(newUserInfo) {
 }
 
 module.exports = {
-    idOverlapCheck,
+    presentIdCheck,
     insertUser
 };
