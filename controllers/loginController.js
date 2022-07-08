@@ -5,6 +5,7 @@ const userService = require('../service/userService.js');
 const util = require('../routes/function.js');
 
 exports.login = async (req, res, next) => {
+    
     User.findOne({  where: { user_id: req.body.user_id }})
         .then((data) => {
             console.log(data);
@@ -15,8 +16,6 @@ exports.login = async (req, res, next) => {
 
     if(!user_id || !user_pw)
         return res.json(util.makeReply(reply, false, 400, '입력하지 않은 항목이 존재합니다.'));
-    if(user_id.length > 15)
-        return res.json(util.makeReply(reply, false, 305, '아이디는 최대 15자까지 가능합니다.'));
 
     try {
         var inputInfo = await userService.presentIdCheck(user_id);
