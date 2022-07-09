@@ -1,10 +1,16 @@
 const User = require('../models/user.js');
+const util = require('../routes/function.js');
 
-async function presentIdCheck(user_id) {
-    User.findOne({ where : { user_id: user_id }})
-        .then((data) => {
-            return data;
-        });
+async function duplicateIdCheck(user_id) {
+    const idData = await User.findOne({ where : { user_id: user_id }});
+    
+    return idData;
+}
+
+async function duplicateNameCheck(user_name) {
+    const nameData = await User.findOne({ where : { user_name: user_name}});
+
+    return nameData;
 }
 
 async function insertUser(newUserInfo) {
@@ -28,6 +34,7 @@ async function insertUser(newUserInfo) {
 }
 
 module.exports = {
-    presentIdCheck,
+    duplicateIdCheck,
+    duplicateNameCheck,
     insertUser
 };

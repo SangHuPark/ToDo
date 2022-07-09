@@ -11,7 +11,7 @@ exports.enroll = async (req, res, next) => {
 
     var reply = {};
 
-    if(!user_id || !user_pw || !user_name)
+    if(!user_id || !user_pw || !user_name || !user_confirmPw)
         return res.json(util.makeReply(reply, false, 400, '입력하지 않은 항목이 존재합니다.'));
     if(user_id.length > 15)
         return res.json(util.makeReply(reply, false, 305, '아이디는 최대 15자까지 가능합니다.'));
@@ -23,9 +23,13 @@ exports.enroll = async (req, res, next) => {
         return res.json(util.makeReply(reply, false, 307, '닉네임은 최대 10자까지 가능합니다.'));
 
     try {
-        var idCheck = await userService.presentIdCheck(user_id);
-        if(idCheck) {
+        var enrollIdCheck = await userService.duplicateIdCheck(user_id);
+        if(enrollIdCheck) {
             return res.json(util.makeReply(reply, false, 301, '이미 사용 중인 아이디입니다.')); 
+        }
+        var nameCheck = await userService.duplicateNameCheck(user_name);
+        if(nameCheck) {
+            return res.json(util.makeReply(reply, false, 308, '이미 사용 중인 이름입니다.'));
         }
 
         const hashed_pw = crypto.createHash('sha512').update(user_pw).digest('base64');
@@ -35,6 +39,6 @@ exports.enroll = async (req, res, next) => {
         return res.json(util.makeReply(reply, true, 200, '회원가입을 성공하였습니다.'));
     } catch (err) {
         console.log(err);
-        return res.status(500).send('Server error respose');
+        return res.json(util.makeReply(reply, false, 500, 'Server error response'));
     }
 }
