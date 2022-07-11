@@ -1,5 +1,5 @@
-const User = require('../models/user');
-const crypto = require('crypto');
+const User = require('../models/user.js');
+const crypto = require('../middlewares/crypto.js');
 
 const userService = require('../service/userService.js');
 const util = require('../routes/function.js');

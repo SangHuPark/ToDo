@@ -1,5 +1,4 @@
 const User = require('../models/user.js');
-const util = require('../routes/function.js');
 
 async function duplicateIdCheck(user_id) {
     const idData = await User.findOne({ where : { user_id: user_id }});

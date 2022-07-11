@@ -1,8 +1,10 @@
 const User = require('../models/user');
-const crypto = require('crypto');
+const crypto = require('../middlewares/crypto.js');
 
 const userService = require('../service/userService.js');
 const util = require('../routes/function.js');
+
+const key = process.env.CRYPTO_SECRET;
 
 exports.enroll = async (req, res, next) => {
     const {
@@ -32,7 +34,8 @@ exports.enroll = async (req, res, next) => {
             return res.json(util.makeReply(reply, false, 308, '이미 사용 중인 이름입니다.'));
         }
 
-        const hashed_pw = crypto.createHash('sha512').update(user_pw).digest('base64');
+        const hashed_pw = crypto.encrypt(user_pw, key);
+        console.log(hashed_pw);
         const newUserInfo = { user_id, hashed_pw, user_name };
         const enrollUser = await userService.insertUser(newUserInfo);
 
