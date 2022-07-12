@@ -12,6 +12,10 @@ module.exports = class User extends Sequelize.Model {
         type: Sequelize.STRING(200),
         allowNull: false,
       },
+      pw_salt: {
+        type: Sequelize.STRING(200),
+        allowNull: false,
+      },
       user_name: {
         type: Sequelize.STRING(10),
         allowNull: false,

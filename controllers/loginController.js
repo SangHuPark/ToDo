@@ -1,8 +1,8 @@
 const User = require('../models/user.js');
-const crypto = require('../middlewares/crypto.js');
 
 const userService = require('../service/userService.js');
-const util = require('../routes/function.js');
+const pwFunc = require('../function/pwFunc.js');
+const util = require('../function/replyFunc.js');
 
 exports.login = async (req, res, next) => {
     
@@ -19,10 +19,9 @@ exports.login = async (req, res, next) => {
             return res.json(util.makeReply(reply, false, 302, '등록되지 않은 회원정보입니다.')); 
         }
 
-        const hashed_pw = crypto.createHash('sha512').update(user_pw).digest('base64');
-        console.log(loginCheck.user_pw);
-        console.log(hashed_pw);
-        if(loginCheck.user_pw !== hashed_pw) {
+        const checkPw = pwFunc.decrypt(user_pw, loginCheck.user_pw);
+        console.log(checkPw);
+        if(checkPw) {
             return res.json(util.makeReply(reply, false, 303, '비밀번호를 확인하세요.'));
         }
 
