@@ -11,17 +11,17 @@ const createSalt = () =>
     });
 
 async function createHashedPassword(plainPassword) {
-    new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         const salt = await createSalt();
         crypto.pbkdf2(plainPassword, salt, 9999, 64, 'sha512', (err, key) => {
             if (err) reject(err);
-            resolve({ hashed_pw: key.toString('base64'), salt });
+            resolve({ hashed_pw: key.toString('base64'), pw_salt: salt });
         });
     });
 }
 
 async function makePasswordHashed (userId, plainPassword) {
-    new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         const pw_salt = await User
             .findOne({
                 attributes: ['pw_salt'],

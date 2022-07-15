@@ -34,9 +34,9 @@ exports.enroll = async (req, res, next) => {
         if(nameCheck) {
             return res.json(util.makeReply(reply, false, 308, '이미 사용 중인 이름입니다.'));
         }
-
-        //const { hashed_pw, pw_salt } = await pwFunc.createHashedPassword(user_pw);
-        console.log(await pwFunc.createHashedPassword(user_pw));
+        const { hashed_pw, pw_salt } = await pwFunc.createHashedPassword(user_pw);
+        //const pwObj = await pwFunc.createHashedPassword(user_pw);
+        //console.log(pwObj);
         const newUserInfo = { user_id, hashed_pw, pw_salt, user_name };
         const enrollUser = await userService.insertUser(newUserInfo);
 

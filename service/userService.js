@@ -14,7 +14,7 @@ async function duplicateNameCheck(user_name) {
 
 async function insertUser(newUserInfo) {
     const {
-        user_id, hashed_pw, user_name
+        user_id, hashed_pw, pw_salt, user_name
     } = newUserInfo;
 
     const newUser = await User
