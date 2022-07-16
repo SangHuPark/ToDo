@@ -22,7 +22,7 @@ async function createHashedPassword(plainPassword) {
 
 async function makePasswordHashed (userId, plainPassword) {
     return new Promise(async (resolve, reject) => {
-        const pw_salt = await User
+        const salt = await User
             .findOne({
                 attributes: ['pw_salt'],
                 raw: true,
@@ -32,7 +32,7 @@ async function makePasswordHashed (userId, plainPassword) {
             })
             .then((result) => result.pw_salt);
 
-        crypto.pbkdf2(plainPassword, pw_salt, 9999, 64, 'sha512', (err, key) => {
+        crypto.pbkdf2(plainPassword, salt, 9999, 64, 'sha512', (err, key) => {
             if (err) reject(err);
             resolve(key.toString('base64'));
         });

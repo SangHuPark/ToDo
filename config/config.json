@@ -4,7 +4,8 @@
     "password": "111111",
     "database": "test",
     "host": "15.164.102.4",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "timezone": "+09:00"
   },
   "test": {
     "username": "root",
