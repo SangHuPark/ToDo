@@ -1,18 +1,18 @@
 const User = require('../models/user.js');
 
-async function duplicateIdCheck(user_id) {
+exports.duplicateIdCheck = async (user_id) => {
     const idData = await User.findOne({ where : { user_id: user_id }});
     
     return idData;
 }
 
-async function duplicateNameCheck(user_name) {
+exports.duplicateNameCheck = async (user_name) => {
     const nameData = await User.findOne({ where : { user_name: user_name}});
 
     return nameData;
 }
 
-async function insertUser(newUserInfo) {
+exports.insertUser = async (newUserInfo) => {
     const {
         user_id, hashed_pw, pw_salt, user_name
     } = newUserInfo;
@@ -33,9 +33,3 @@ async function insertUser(newUserInfo) {
 
     return newUser;
 }
-
-module.exports = {
-    duplicateIdCheck,
-    duplicateNameCheck,
-    insertUser
-};
