@@ -20,7 +20,7 @@ async function createHashedPassword(plainPassword) {
     });
 }
 
-async function makePasswordHashed (userId, plainPassword) {
+async function makePasswordHashed(userId, plainPassword) {
     return new Promise(async (resolve, reject) => {
         const salt = await User
             .findOne({
@@ -31,7 +31,6 @@ async function makePasswordHashed (userId, plainPassword) {
                 },
             })
             .then((result) => result.pw_salt);
-
         crypto.pbkdf2(plainPassword, salt, 9999, 64, 'sha512', (err, key) => {
             if (err) reject(err);
             resolve(key.toString('base64'));
