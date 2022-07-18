@@ -5,7 +5,7 @@ dotenv.config();
 
 const loginRouter = require('./routes/loginRouter.js');
 const enrollRouter = require('./routes/enrollRouter.js');
-const authRouter = require('./routes/authRouter.js');
+const todoRouter = require('./routes/todoRouter.js');
 const { sequelize } = require('./models');
 
 const app = express();
@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use('/login', loginRouter);
 app.use('/enroll', enrollRouter);
-app.use('/auth', authRouter);
+app.use('/todo', todoRouter);
 
 app.listen(app.get('port'), () => {
     console.log(app.get('port'), "port connected!!");
