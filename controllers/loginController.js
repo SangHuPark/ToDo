@@ -37,6 +37,7 @@ exports.login = async (req, res, next) => {
           });
         
         return res.status(200).json({
+            isSuccess: true,
             code: 200,
             message: '토큰이 발급되었습니다.',
             token: token

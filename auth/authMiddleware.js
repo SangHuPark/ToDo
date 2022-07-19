@@ -1,21 +1,17 @@
 const jwt = require('jsonwebtoken');
+const util = require('../function/replyFunc.js');
 
 exports.auth = async (req, res, next) => {
   try {
     req.decoded = jwt.verify(req.headers.authorization, process.env.JWT_SECRET_KEY);
     return next();
   } catch (error) {
+    var tokenReply = {}
     if (error.name === 'TokenExpiredError') {
-      return res.status(419).json({
-        code: 419,
-        message: '토큰이 만료되었습니다',
-      });
+      return res.json(util.tokenReply(tokenReply, false, 419, '토큰이 만료되었습니다', { error }));
     }
     if (error.name === 'JsonWebTokenError') {
-      return res.status(401).json({
-        code: 401,
-        message: '유효하지 않은 토큰입니다',
-      });
+      return res.json(util.tokenReply(tokenReply, false, 401, '유효하지 않은 토큰입니다', { error }));
     }
   }
 };

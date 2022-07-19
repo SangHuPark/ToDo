@@ -1,18 +1,14 @@
 const express = require('express');
 const { auth } = require('../auth/authMiddleware.js');
+const util = require('../function/replyFunc.js');
 
 const router = express.Router();
 
-router.route('/', auth)
-    .get(async (req, res) => {
+router.route('/')
+    .get(auth, async (req, res) => {
         const user_id = req.decoded.user_id;
-        return res.status(200).json({
-          code: 200,
-          message: '토큰은 정상입니다.',
-          data: {
-            user_id: user_id
-          }
-        });
+        var tokenReply = {};
+        return res.json(util.tokenReply(tokenReply, true, 200, '토큰은 정상입니다.', { user_id }));
     })
     .post()
 

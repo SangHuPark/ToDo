@@ -1,35 +1,28 @@
 const Sequelize = require('sequelize');
 
-module.exports = class User extends Sequelize.Model {
+module.exports = class Todo extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
       },
-      user_id: {
-        type: Sequelize.STRING(15),
+      owner: {
+        type: Sequelize.STRING(10),
         allowNull: false,
         primaryKey: true
       },
-      user_pw: {
-        type: Sequelize.STRING(200),
-        allowNull: false,
-      },
-      pw_salt: {
-        type: Sequelize.STRING(200),
-        allowNull: false,
-      },
-      user_name: {
+      month_pocket: {
         type: Sequelize.STRING(10),
         allowNull: false,
-      }
+        primaryKey: true
+      },
     }, {
       sequelize,
       timestamps: false,
       underscored: false,
-      modelName: 'User',
-      tableName: 'users',
+      modelName: 'Schedule_bundle',
+      tableName: 'schedule_bundle',
       paranoid: false,
       charset: 'utf8',
       collate: 'utf8_general_ci',
@@ -37,6 +30,7 @@ module.exports = class User extends Sequelize.Model {
   }
 
   static associate(db) {
-    db.User.hasMany(db.Todo, { foreignKey: 'owner', sourcekey: 'user_id' });
+    db.schedule_bundle.belongsTo(db.User, { foreignKey: 'owner', targetKey: 'user_id' });
+    db.schedule_bundle.hasMany(db.Todo, { foreignKey: '{ owner, month_pocket }', });
   }
 };

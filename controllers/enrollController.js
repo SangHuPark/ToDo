@@ -7,10 +7,7 @@ const util = require('../function/replyFunc.js');
 const key = process.env.CRYPTO_SECRET;
 
 exports.enroll = async (req, res, next) => {
-    const user_id = req.body.user_newId;
-    const user_pw = req.body.user_newPw;
-    const user_confirmPw = req.body.user_confirmPw;
-    const user_name = req.body.user_newName;
+    const { user_id, user_pw, user_confirmPw, user_name } = req.body;
 
     var reply = {};
 
