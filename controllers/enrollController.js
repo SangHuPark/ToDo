@@ -40,6 +40,7 @@ exports.enroll = async (req, res, next) => {
         return res.json(util.makeReply(reply, true, 200, '회원가입을 성공하였습니다.'));
     } catch (err) {
         console.log(err);
+        
         return res.json(util.makeReply(reply, false, 500, 'Server error response'));
     }
 }

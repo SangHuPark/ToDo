@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 const env = process.env.NODE_ENV || 'development';
 const config = require('../config/config.json')[env];
-const User = require('./user');
-const Todo = require('./todo');
+const User = require('./user.js');
+const Todo = require('./todo.js');
 
 const db = {};
 
