@@ -18,14 +18,6 @@ module.exports = class Todo extends Sequelize.Model {
       },
       content: {
         type: Sequelize.STRING(140),
-        allowNull: false,
-      },
-      owner_bundle: {
-        type: Sequelize.STRING(10),
-        allowNull: false
-      },
-      month_bundle: {
-        type: Sequelize.INTEGER(10),
         allowNull: false
       }
     }, {
@@ -41,6 +33,6 @@ module.exports = class Todo extends Sequelize.Model {
   }
 
   static associate(db) {
-    db.Todo.belongsTo(db.Schedule_bundle, { foreignKey : ['owner_bundle', 'month_bundle'], targetKey : ['owner', 'month_pocket'] });
+    db.Todo.belongsTo(db.User, { foreignKey : "owner_id", targetKey : "user_id" });
   }
 };
