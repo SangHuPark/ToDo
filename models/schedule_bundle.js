@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-module.exports = class Todo extends Sequelize.Model {
+module.exports = class Schedule_bundle extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
       id: {
@@ -9,11 +9,10 @@ module.exports = class Todo extends Sequelize.Model {
       },
       owner: {
         type: Sequelize.STRING(10),
-        allowNull: false,
         primaryKey: true
       },
       month_pocket: {
-        type: Sequelize.STRING(10),
+        type: Sequelize.INTEGER(10),
         allowNull: false,
         primaryKey: true
       },
@@ -30,7 +29,8 @@ module.exports = class Todo extends Sequelize.Model {
   }
 
   static associate(db) {
-    db.schedule_bundle.belongsTo(db.User, { foreignKey: 'owner', targetKey: 'user_id' });
-    db.schedule_bundle.hasMany(db.Todo, { foreignKey: '{ owner, month_pocket }', });
+    db.Schedule_bundle.belongsTo(db.User, { foreignKey: 'owner', targetKey: 'user_id' });
+
+    db.Schedule_bundle.hasMany(db.Todo, { foreignKey: ['owner_bundle', 'month_bundle'], sourceKey: ['owner', 'month_pocket']})
   }
 };

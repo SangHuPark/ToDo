@@ -37,6 +37,6 @@ module.exports = class User extends Sequelize.Model {
   }
 
   static associate(db) {
-    db.User.hasMany(db.Todo, { foreignKey: 'owner', sourcekey: 'user_id' });
+    db.User.hasMany(db.Schedule_bundle, { foreignKey: 'owner', sourcekey: 'user_id' });
   }
 };

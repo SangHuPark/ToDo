@@ -6,6 +6,7 @@ module.exports = class Todo extends Sequelize.Model {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
+        primaryKey: true
       },
       date: {
         type: Sequelize.DATE,
@@ -19,6 +20,14 @@ module.exports = class Todo extends Sequelize.Model {
         type: Sequelize.STRING(140),
         allowNull: false,
       },
+      owner_bundle: {
+        type: Sequelize.STRING(10),
+        allowNull: false
+      },
+      month_bundle: {
+        type: Sequelize.INTEGER(10),
+        allowNull: false
+      }
     }, {
       sequelize,
       timestamps: false,
@@ -32,6 +41,6 @@ module.exports = class Todo extends Sequelize.Model {
   }
 
   static associate(db) {
-    db.Todo.belongsTo(db.User);
+    db.Todo.belongsTo(db.Schedule_bundle, { foreignKey : ['owner_bundle', 'month_bundle'], targetKey : ['owner', 'month_pocket'] });
   }
 };
