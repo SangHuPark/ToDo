@@ -12,7 +12,7 @@ exports.login = async (req, res, next) => {
     const user_name = await User.findOne({  attributes:['user_name'], where: { user_id: req.body.user_id }});
 
     var reply = {};
-    var tokenReply = {};
+    var dataReply = {};
 
     if(!user_id || !user_pw)
         return res.json(util.makeReply(reply, false, 400, '입력하지 않은 항목이 존재합니다.'));
@@ -32,11 +32,11 @@ exports.login = async (req, res, next) => {
             type: 'JWT',
             user_id: user_id
           }, JWT_SECRET_KEY, {
-            expiresIn: '15m',
+            expiresIn: '1d',
             issuer: user_name.toString(),
           });
         
-        return res.json(util.tokenReply(tokenReply, true, 200, '토큰이 발급되었습니다.', { token }));
+        return res.json(util.dataReply(dataReply, true, 200, '토큰이 발급되었습니다.', { token }));
     } catch (err) {
         console.log(err);
 

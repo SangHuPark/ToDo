@@ -7,17 +7,8 @@ const Todo = require('./todo.js');
 const db = {};
 
 const sequelize = new Sequelize(
-  config.database, config.username, config.password, config, /*{
-    host: config.host,
-    port: config.port,
-    dialect: config.dialect,
-    timezone: "Asia/Seoul",
-    dialectOptions: {
-      charset: "utf8mb4",
-      dateStrings: true,
-      typeCast: true,
-    },
-  }*/);
+  config.database, config.username, config.password, config,
+  );
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
