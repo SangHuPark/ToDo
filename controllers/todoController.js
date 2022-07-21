@@ -69,13 +69,12 @@ exports.patchTodo = async (req, res, next) => {
     const user_id = req.decoded.user_id;
 
     reply = {};
-    var dataReply = {};
 
     try{
         const patchTodoInfo = { id, date, title, content };
         const patchedTodo = await todoService.patchService(patchTodoInfo, user_id);
 
-        return res.json(util.dataReply(dataReply, true, 'ToDo 가 수정되었습니다.', { patchedTodo }));
+        return res.json(util.makeReply(reply, true, 'ToDo 가 수정되었습니다.'));
     } catch (err) {
         console.log(err);
 
