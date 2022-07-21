@@ -74,7 +74,7 @@ exports.patchTodo = async (req, res, next) => {
         const patchTodoInfo = { id, date, title, content };
         const patchedTodo = await todoService.patchService(patchTodoInfo, user_id);
 
-        return res.json(util.makeReply(reply, true, 'ToDo 가 수정되었습니다.'));
+        return res.json(util.makeReply(reply, true, 200, 'ToDo 가 수정되었습니다.'));
     } catch (err) {
         console.log(err);
 
