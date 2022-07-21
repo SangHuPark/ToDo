@@ -54,7 +54,7 @@ exports.deleteTodo = async (req, res, next) => {
     try {
         const deletedTodo = await todoService.deleteService(deleteId, user_id);
 
-        return res.json(util.dataReply(dataReply, true, 'ToDo 가 삭제되었습니다.', { deletedTodo }));
+        return res.json(util.dataReply(dataReply, true, 200, 'ToDo 가 삭제되었습니다.', { deletedTodo }));
     } catch (err) {
         console.log(err);
 
