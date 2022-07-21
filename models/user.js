@@ -31,12 +31,12 @@ module.exports = class User extends Sequelize.Model {
       modelName: 'User',
       tableName: 'users',
       paranoid: false,
-      charset: 'utf8',
-      collate: 'utf8_general_ci',
+      charset: 'utf8mb4',
+      collate: 'utf8mb4_general_ci',
     });
   }
 
   static associate(db) {
-    db.User.hasMany(db.Todo, { foreignKey : "owner_id", sourceKey : "user_id"});
+    db.User.hasMany(db.Todo, { foreignKey: 'owner_id', sourceKey: 'user_id' });
   }
 };

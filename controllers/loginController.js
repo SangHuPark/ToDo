@@ -9,10 +9,10 @@ const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 exports.login = async (req, res, next) => {
     const { user_id, user_pw } = req.body;
-    const user_name = await User.findOne({  attributes:['user_name'], where: { user_id: req.body.user_id }})
-    console.log(user_name);
+    const user_name = await User.findOne({  attributes:['user_name'], where: { user_id: req.body.user_id }});
 
     var reply = {};
+    var dataReply = {};
 
     if(!user_id || !user_pw)
         return res.json(util.makeReply(reply, false, 400, '입력하지 않은 항목이 존재합니다.'));
@@ -32,18 +32,14 @@ exports.login = async (req, res, next) => {
             type: 'JWT',
             user_id: user_id
           }, JWT_SECRET_KEY, {
-            expiresIn: '15m',
+            expiresIn: '1d',
             issuer: user_name.toString(),
           });
         
-        return res.status(200).json({
-            isSuccess: true,
-            code: 200,
-            message: '토큰이 발급되었습니다.',
-            token: token
-        });
+        return res.json(util.dataReply(dataReply, true, 200, '토큰이 발급되었습니다.', { token }));
     } catch (err) {
         console.log(err);
+
         return res.json(util.makeReply(reply, false, 500, 'Server error response'));
     }
 }

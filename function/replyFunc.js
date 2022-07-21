@@ -6,11 +6,11 @@ exports.makeReply = (reply, isSuccess, code, message) => {
     return reply;
 }
 
-exports.tokenReply = (tokenReply, isSuccess, code, message, data ) => {
-    tokenReply.isSuccess = isSuccess;
-    tokenReply.code = code;
-    tokenReply.message = message;
-    tokenReply.data = data;
+exports.dataReply = (dataReply, isSuccess, code, message, data ) => {
+    dataReply.isSuccess = isSuccess;
+    dataReply.code = code;
+    dataReply.message = message;
+    dataReply.data = data;
 
-    return tokenReply;
+    return dataReply;
 }
