@@ -64,6 +64,7 @@ exports.patchService = async (patchTodoInfo, user_id) => {
             content: content
         },
         { 
+            attributes : [ 'date', 'title', 'content' ],
             where : { id : id, owner_id : user_id } 
         })
         .catch((err) => {
