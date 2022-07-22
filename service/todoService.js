@@ -27,7 +27,7 @@ exports.existTodo = async (findTodoInfo) => {
     const { 
         date, user_id 
     } = findTodoInfo;
-
+    
     const findResult = await Todo.findAll({ 
         attributes : [ 'id', 'date', 'title', 'content' ],
         where : { date : date, owner_id : user_id } });

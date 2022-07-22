@@ -26,7 +26,7 @@ exports.addTodo = async (req, res, next) => {
 }
 
 exports.findTodo = async (req, res, next) => {
-    const date = req.body.date;
+    const date = req.params.date;
     const user_id = req.decoded.user_id;
 
     var reply = {};
