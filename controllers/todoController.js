@@ -35,6 +35,9 @@ exports.findTodo = async (req, res, next) => {
     try{
         const findTodoInfo = { date, user_id };
         const findedTodo = await todoService.existTodo(findTodoInfo);
+        console.log(findedTodo);
+        if( findedTodo.length === 0 )
+            return res.json(util.makeReply(reply, true, 200, "해당 날짜에는 아직 생성한 Todo 가 존재하지 않습니다."));
 
         return res.json(util.dataReply(dataReply, true, 200, '조회된 Todo List 입니다.', { findedTodo }));
     } catch (err) {
