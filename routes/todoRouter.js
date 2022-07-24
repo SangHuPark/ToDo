@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { auth } = require('../auth/authMiddleware.js');
+const { auth } = require('../auth/jwt.js');
 const todoController = require('../controllers/todoController.js')
 
 const router = express.Router();
