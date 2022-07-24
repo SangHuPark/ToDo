@@ -23,6 +23,15 @@ exports.insertTodo = async (newTodoInfo) => {
     return newTodo;
 }
 
+exports.homeTodo = async (user_id) => {
+    const findAllTodo = await Todo.findAll({
+        attributes : [ 'date' ],
+        where : { owner_id : user_id }
+    });
+
+    return findAllTodo;
+}
+
 exports.existTodo = async (findTodoInfo) => {
     const { 
         date, user_id 
@@ -30,7 +39,8 @@ exports.existTodo = async (findTodoInfo) => {
     
     const findResult = await Todo.findAll({ 
         attributes : [ 'id', 'date', 'title', 'content' ],
-        where : { date : date, owner_id : user_id } });
+        where : { date : date, owner_id : user_id } 
+    });
 
     return findResult;
 }

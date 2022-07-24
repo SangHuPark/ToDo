@@ -1,6 +1,3 @@
-const User = require('../models/user.js');
-const Todo = require('../models/todo.js');
-
 const todoService = require('../service/todoService.js');
 const util = require('../function/replyFunc.js');
 
@@ -18,6 +15,23 @@ exports.addTodo = async (req, res, next) => {
         const newTodo = await todoService.insertTodo(newTodoInfo);
 
         return res.json(util.makeReply(reply, true, 200, '새로운 Todo가 추가되었습니다.'));
+    } catch (err) {
+        console.log(err);
+
+        return res.json(util.makeReply(reply, false, 500, 'Server error response'));
+    }
+}
+
+exports.allTodo = async (req, res, next) => {
+    const user_id = req.decoded.user_id;
+
+    var reply = {};
+    var dataReply = {};
+
+    try {
+        const findedAllTodo = await todoService.homeTodo(user_id);
+
+        return res.json(util.dataReply(dataReply, true, 200, '해당 사용자의 전체 Todo List 입니다.', { findedAllTodo }));
     } catch (err) {
         console.log(err);
 
@@ -50,7 +64,6 @@ exports.findTodo = async (req, res, next) => {
 exports.deleteTodo = async (req, res, next) => {
     const deleteId = req.body.id;
     const user_id = req.decoded.user_id;
-    console.log(user_id);
 
     var dataReply = {};
 
