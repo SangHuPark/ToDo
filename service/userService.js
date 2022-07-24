@@ -1,6 +1,6 @@
 const User = require('../models/user.js');
 
-exports.duplicateIdCheck = async (user_id) => {
+exports.existIdCheck = async (user_id) => {
     const idData = await User.findOne({ where : { user_id: user_id }});
     
     return idData;
@@ -32,4 +32,31 @@ exports.insertUser = async (newUserInfo) => {
         });
 
     return newUser;
+}
+
+exports.correctUser = async (correctUserInfo) => {
+    const { user_id, user_pw } = correctUserInfo;
+
+    const correctResult = await User
+        .findOne({
+            attributes : [ 'user_pw' ],
+            where : { user_ }
+        })
+}
+
+exports.deleteUser = async (user_id) => {
+    const deleteUserInfo = await User
+        .findOne({
+            attributes : [ 'user_id', 'user_name' ],
+            where : { id : user_id }
+        })
+        .catch((err) => {
+            throw new Error(err);
+        });
+    
+    await User.destroy({
+        where : { id : user_id }
+    });
+
+    return deleteUserInfo;
 }
