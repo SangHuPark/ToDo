@@ -7,8 +7,14 @@ const Todo = require('./todo.js');
 const db = {};
 
 const sequelize = new Sequelize(
-  config.database, config.username, config.password, config,
-  );
+  config.database, config.username, config.password, config, {
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000
+    }
+  });
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
