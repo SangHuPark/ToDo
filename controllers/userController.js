@@ -82,23 +82,19 @@ exports.enroll = async (req, res, next) => {
 }
 
 exports.resign = async (req, res, next) => {
-    user_pw = req.body;
+    user_pw = req.body.user_pw;
     user_id = req.decoded.user_id;
-    var correctUserInfo = { user_id, user_pw };
     
     var reply = {};
 
     try {
-        var inputCheck = await userService.existIdCheck(user_id);
-        console.log(1);
+        var resignCheck = await userService.existIdCheck(user_id);
         var checkPw = await pwFunc.makePasswordHashed(user_id, user_pw);
-        console.log(2);
-        console.log(checkPw);
-        if(checkPw !== inputCheck.user_pw) {
+        if(checkPw !== resignCheck.user_pw) {
             return res.json(util.makeReply(reply, false, 303, '비밀번호를 확인하세요.'));
         }
 
-        var deleteInfo = await userService.deleteUser(correctUserInfo);
+        var deleteInfo = await userService.deleteUser(user_id);
 
         return res.json(util.makeReply(reply, true, 200, '회원탈퇴를 성공하였습니다.'));
     } catch (err) {
