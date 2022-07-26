@@ -11,10 +11,12 @@ const sequelize = new Sequelize(
     pool: {
       max: 5,
       min: 0,
-      idle: 10000
+      idle: 0,
+      acquire: 3000
     }
   });
-
+  /*sequelize.connectionManager.initPools();
+  sequelize.connectionManager.close();*/
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
