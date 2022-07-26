@@ -65,6 +65,7 @@ exports.deleteTodo = async (req, res, next) => {
     const deleteId = req.body.id;
     const user_id = req.decoded.user_id;
 
+    var reply = {};
     var dataReply = {};
 
     try {

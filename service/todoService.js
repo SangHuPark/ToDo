@@ -73,6 +73,7 @@ exports.deleteService = async (deleteId, user_id) => {
     });
 
     // Todo.sequelize.connectionManager.close();
+    console.log(deleteResult);
     
     return deleteResult;
 }
