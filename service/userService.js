@@ -1,21 +1,21 @@
 const User = require('../models/user.js');
 
 exports.existIdCheck = async (user_id) => {
-    User.sequelize.connectionManager.initPools();
+    // User.sequelize.connectionManager.initPools();
 
     const idData = await User.findOne({ where : { user_id: user_id }});
     
-    User.sequelize.connectionManager.close();
+    // User.sequelize.connectionManager.close();
 
     return idData;
 }
 
 exports.duplicateNameCheck = async (user_name) => {
-    User.sequelize.connectionManager.initPools();
+    // User.sequelize.connectionManager.initPools();
 
     const nameData = await User.findOne({ where : { user_name: user_name}});
 
-    User.sequelize.connectionManager.close();
+    // User.sequelize.connectionManager.close();
 
     return nameData;
 }
@@ -25,7 +25,7 @@ exports.insertUser = async (newUserInfo) => {
         user_id, hashed_pw, pw_salt, user_name
     } = newUserInfo;
 
-    User.sequelize.connectionManager.initPools();
+    // User.sequelize.connectionManager.initPools();
 
     const newUser = await User
         .create({
@@ -41,13 +41,13 @@ exports.insertUser = async (newUserInfo) => {
             throw new Error(err);
         });
 
-    User.sequelize.connectionManager.close();
+    // User.sequelize.connectionManager.close();
 
     return newUser;
 }
 
 exports.deleteUser = async (user_id) => {
-    User.sequelize.connectionManager.initPools();
+    // User.sequelize.connectionManager.initPools();
 
     const deleteUserInfo = await User
         .findOne({
@@ -62,7 +62,7 @@ exports.deleteUser = async (user_id) => {
         where : { user_id : user_id }
     });
 
-    User.sequelize.connectionManager.close();
+    // User.sequelize.connectionManager.close();
 
     return deleteUserInfo;
 }
