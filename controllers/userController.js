@@ -94,7 +94,7 @@ exports.resign = async (req, res, next) => {
             return res.json(util.makeReply(reply, false, 303, '비밀번호를 확인하세요.'));
         }
 
-        var deleteInfo = await userService.deleteUser(user_id);
+        await userService.deleteUser(user_id);
 
         return res.json(util.makeReply(reply, true, 200, '회원탈퇴를 성공하였습니다.'));
     } catch (err) {
