@@ -5,6 +5,7 @@ exports.insertTodo = async (newTodoInfo) => {
         date, title, content, user_id
     } = newTodoInfo;
     
+    Todo.sequelize.connectionManager.initPools();
 
     const newTodo = await Todo
         .create({
@@ -20,14 +21,20 @@ exports.insertTodo = async (newTodoInfo) => {
             throw new Error(err);
         });
 
+    Todo.sequelize.connectionManager.close();
+
     return newTodo;
 }
 
 exports.homeTodo = async (user_id) => {
+    Todo.sequelize.connectionManager.initPools();
+
     const findAllTodo = await Todo.findAll({
         attributes : [ 'date' ],
         where : { owner_id : user_id }
     });
+
+    Todo.sequelize.connectionManager.close();
 
     return findAllTodo;
 }
@@ -36,16 +43,22 @@ exports.existTodo = async (findTodoInfo) => {
     const { 
         date, user_id 
     } = findTodoInfo;
+
+    Todo.sequelize.connectionManager.initPools();
     
     const findResult = await Todo.findAll({ 
         attributes : [ 'id', 'date', 'title', 'content' ],
         where : { date : date, owner_id : user_id } 
     });
 
+    Todo.sequelize.connectionManager.close();
+
     return findResult;
 }
 
 exports.deleteService = async (deleteId, user_id) => {
+    Todo.sequelize.connectionManager.initPools();
+
     const deleteResult = await Todo
         .findOne({
             attributes : [ 'date', 'title', 'content' ],
@@ -59,8 +72,8 @@ exports.deleteService = async (deleteId, user_id) => {
         where : { id : deleteId }
     });
 
-    await Todo.sequelize.close();
-
+    Todo.sequelize.connectionManager.close();
+    
     return deleteResult;
 }
 
@@ -68,6 +81,8 @@ exports.patchService = async (patchTodoInfo, user_id) => {
     const { 
         id, date, title, content
     } = patchTodoInfo;
+
+    Todo.sequelize.connectionManager.initPools();
 
     const patchResult = await Todo
         .update({
@@ -82,6 +97,8 @@ exports.patchService = async (patchTodoInfo, user_id) => {
         .catch((err) => {
             throw new Error(err);
         });
+
+    Todo.sequelize.connectionManager.close();
 
     return patchResult;
 }
