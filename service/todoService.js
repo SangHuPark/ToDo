@@ -59,6 +59,8 @@ exports.deleteService = async (deleteId, user_id) => {
         where : { id : deleteId }
     });
 
+    await Todo.sequelize.close();
+
     return deleteResult;
 }
 
