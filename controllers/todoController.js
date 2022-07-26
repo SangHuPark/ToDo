@@ -68,6 +68,9 @@ exports.deleteTodo = async (req, res, next) => {
     var dataReply = {};
 
     try {
+        if(!deleteId || !user_id)
+            return res.json(util.makeReply(reply, false, 400, '입력하지 않은 항목이 존재합니다.'));
+
         const deletedTodo = await todoService.deleteService(deleteId, user_id);
         
         return res.json(util.dataReply(dataReply, true, 200, 'ToDo 가 삭제되었습니다.', { deletedTodo }));
@@ -87,6 +90,9 @@ exports.patchTodo = async (req, res, next) => {
     reply = {};
 
     try{
+        if(!id || !date || !title || !content || !user_id)
+            return res.json(util.makeReply(reply, false, 400, '입력하지 않은 항목이 존재합니다.'));
+
         const patchTodoInfo = { id, date, title, content };
         await todoService.patchService(patchTodoInfo, user_id);
 
