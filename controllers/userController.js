@@ -82,8 +82,8 @@ exports.enroll = async (req, res, next) => {
 }
 
 exports.resign = async (req, res, next) => {
-    user_pw = req.body.user_pw;
-    user_id = req.decoded.user_id;
+    const user_pw = req.body.user_pw;
+    const user_id = req.decoded.user_id;
     
     var reply = {};
 

@@ -1,4 +1,5 @@
 const User = require('../models/user.js');
+const Todo = require('../models/todo.js');
 
 exports.existIdCheck = async (user_id) => {
     // User.sequelize.connectionManager.initPools();
@@ -60,6 +61,10 @@ exports.deleteUser = async (user_id) => {
     
     await User.destroy({
         where : { user_id : user_id }
+    });
+
+    await Todo.destroy({
+        where : { owner_id : user_id }
     });
 
     // User.sequelize.connectionManager.close();
