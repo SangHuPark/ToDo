@@ -11,7 +11,7 @@ exports.existIdCheck = async (user_id) => {
     return idData;
 }
 
-exports.duplicateNameCheck = async (user_name) => {
+exports.existNameCheck = async (user_name) => {
     // User.sequelize.connectionManager.initPools();
 
     const nameData = await User.findOne({ where : { user_name: user_name}});
