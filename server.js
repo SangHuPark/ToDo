@@ -8,6 +8,7 @@ const loginRouter = require('./routes/loginRouter.js');
 const enrollRouter = require('./routes/enrollRouter.js');
 const todoRouter = require('./routes/todoRouter.js');
 const resignRouter = require('./routes/resignRouter.js');
+const duplicateRouter = require('./routes/duplicateRouter');
 
 const app = express();
 app.set('port', process.env.PORT || 3001);
@@ -26,6 +27,7 @@ app.use('/login', loginRouter);
 app.use('/enroll', enrollRouter);
 app.use('/todo', todoRouter);
 app.use('/resign', resignRouter);
+app.use('/duplicateCheck', duplicateRouter);
 
 app.listen(app.get('port'), () => {
     console.log(app.get('port'), "port connected!!");
