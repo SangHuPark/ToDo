@@ -64,6 +64,7 @@ exports.deleteUser = async (user_id) => {
     });
 
     await Todo.destroy({
+        truncate : true,
         where : { owner_id : user_id }
     });
 
