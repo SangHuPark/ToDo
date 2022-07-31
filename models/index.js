@@ -15,8 +15,9 @@ const sequelize = new Sequelize(
       acquire: 3000
     }
   });
-  /*sequelize.connectionManager.initPools();
-  sequelize.connectionManager.close();*/
+
+//sequelize.connectionManager.initPools();
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
@@ -28,5 +29,7 @@ Todo.init(sequelize);
 
 User.associate(db);
 Todo.associate(db);
+
+//sequelize.connectionManager.close();
 
 module.exports = db;
