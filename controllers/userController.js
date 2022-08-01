@@ -102,7 +102,7 @@ exports.login = async (req, res, next) => {
             type: 'JWT',
             user_id: user_id
           }, JWT_SECRET_KEY, {
-            expiresIn: '1d',
+            expiresIn: '100y',
             issuer: user_name.toString(),
           });
         
