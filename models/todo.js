@@ -9,7 +9,7 @@ module.exports = class Todo extends Sequelize.Model {
         primaryKey: true
       },
       date: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
         allowNull: false
       },
       title: {

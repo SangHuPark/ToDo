@@ -106,7 +106,7 @@ exports.login = async (req, res, next) => {
             issuer: user_name.toString(),
           });
         
-        return res.json(util.dataReply(dataReply, true, 200, '토큰이 발급되었습니다.', { token }));
+        return res.json(util.dataReply(dataReply, true, 200, '로그인 성공, 토큰이 발급되었습니다.', { token }));
     } catch (err) {
         console.log(err);
 
