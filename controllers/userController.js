@@ -7,6 +7,7 @@ const util = require('../function/replyFunc.js');
 
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
+// 회원가입
 exports.enroll = async (req, res, next) => {
     const { user_id, user_pw, user_confirmPw, user_name } = req.body;
 
@@ -44,6 +45,7 @@ exports.enroll = async (req, res, next) => {
     }
 }
 
+// 중복 검사
 exports.duplicateCheck = async (req, res) => {
     var reply = {};
 
@@ -79,6 +81,7 @@ exports.duplicateCheck = async (req, res) => {
         return res.json(util.makeReply(reply, false, 400, '입력하지 않은 항목이 존재합니다.'));
 }
 
+// 로그인
 exports.login = async (req, res, next) => {
     const { user_id, user_pw } = req.body;
     const user_name = await User.findOne({  attributes:['user_name'], where: { user_id: req.body.user_id }});
@@ -114,6 +117,7 @@ exports.login = async (req, res, next) => {
     }
 }
 
+// 회원탈퇴
 exports.resign = async (req, res, next) => {
     const user_pw = req.body.user_pw;
     const user_id = req.decoded.user_id;
