@@ -22,7 +22,7 @@ exports.enroll = async (req, res, next) => {
     if(user_pw !== user_confirmPw)
         return res.json(util.makeReply(reply, false, 304, '비밀번호가 일치하지 않습니다.'));
     if(user_name.length > 10)
-        return res.json(util.makeReply(reply, false, 307, '닉네임은 최대 10자까지 가능합니다.'));
+        return res.json(util.makeReply(reply, false, 307, '이름은 최대 10자까지 가능합니다.'));
 
     try {
         const { hashed_pw, pw_salt } = await pwFunc.createHashedPassword(user_pw);
