@@ -1,6 +1,7 @@
 const todoService = require('../service/todoService.js');
 const util = require('../function/replyFunc.js');
 
+// 투두 추가
 exports.addTodo = async (req, res, next) => {
     const { date, title, content } = req.body;
     const user_id = req.decoded.user_id;
@@ -22,6 +23,7 @@ exports.addTodo = async (req, res, next) => {
     }
 }
 
+// 로그인 후 전체 투두 조회 (필요할까?)
 exports.allTodo = async (req, res, next) => {
     const user_id = req.decoded.user_id;
 
