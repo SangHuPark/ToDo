@@ -16,3 +16,7 @@ model users {
   pw_salt   String @db.VarChar(200)
   user_name String @unique @db.VarChar(10)
 }
+
+model todo {
+  uuid String 
+}
