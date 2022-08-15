@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": "111111",
-    "database": "test",
-    "host": "15.164.102.4",
+    "username": "SangHu",
+    "password": "tkdgn5408",
+    "database": "todo",
+    "host": "3.34.183.110",
     "dialect": "mysql",
     "timezone": "+09:00"
   },
