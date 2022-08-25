@@ -8,13 +8,14 @@ const util = require('../function/replyFunc.js');
 
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
-const user_name_pattern = /^[ㄱ-ㅎ|가-힣|a-z|A-Z]+$/;
+/*const user_name_pattern = /^[ㄱ-ㅎ|가-힣|a-z|A-Z]+$/;
 const nameSchema = Joi.object().keys({
     user_name: Joi.string()
         .max(15)
         .pattern(new RegExp(user_name_pattern))
         .required()
     });
+*/
 
 // 회원가입
 exports.enroll = async (req, res, next) => {
@@ -34,7 +35,7 @@ exports.enroll = async (req, res, next) => {
         return res.json(util.makeReply(reply, false, 307, '이름은 최대 10자까지 가능합니다.'));
 
     try {
-        await nameSchema.validateAsync(user_name);
+        // await nameSchema.validateAsync(user_name);
         const { hashed_pw, pw_salt } = await pwFunc.createHashedPassword(user_pw);
         const newUserInfo = { user_id, hashed_pw, pw_salt, user_name };
         await userService.insertUser(newUserInfo);
@@ -43,8 +44,9 @@ exports.enroll = async (req, res, next) => {
     } catch (err) {
         console.log(err.message);
         
-        if(err.message.includes('value'))
+        /*if(err.message.includes('value'))
             return res.json(util.makeReply(reply, false, 309, '올바른 형식의 이름이 아닙니다.'));
+`       */
 
         return res.json(util.makeReply(reply, false, 500, 'Server error response'));
     }
