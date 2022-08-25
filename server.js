@@ -11,7 +11,7 @@ const resignRouter = require('./routes/resignRouter.js');
 const duplicateRouter = require('./routes/duplicateRouter');
 
 const app = express();
-app.set('port', process.env.PORT || 3008);
+app.set('port', process.env.PORT || 3000);
 
 sequelize.sync({ force: false })
   .then(() => {
