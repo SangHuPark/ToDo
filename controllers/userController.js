@@ -1,6 +1,6 @@
 const User = require('../models/user.js');
 const jwt = require('jsonwebtoken');
-const Joi = require('joi');
+// const Joi = require('joi');
 
 const userService = require('../service/userService.js');
 const pwFunc = require('../function/pwFunc.js');
