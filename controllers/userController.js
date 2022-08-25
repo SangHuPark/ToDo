@@ -1,6 +1,5 @@
 const User = require('../models/user.js');
 const jwt = require('jsonwebtoken');
-const Joi = require('joi');
 
 const userService = require('../service/userService.js');
 const pwFunc = require('../function/pwFunc.js');
@@ -33,7 +32,7 @@ exports.enroll = async (req, res, next) => {
         return res.json(util.makeReply(reply, true, 200, '회원가입을 성공하였습니다.'));
     } catch (err) {
         console.log(err.message);
-        
+
         return res.json(util.makeReply(reply, false, 500, 'Server error response'));
     }
 }
