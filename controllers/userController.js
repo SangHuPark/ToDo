@@ -8,7 +8,7 @@ const util = require('../function/replyFunc.js');
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 // 회원가입
-exports.enroll = async (req, res, next) => {
+exports.enroll = async (req, res) => {
     const { user_id, user_pw, user_confirmPw, user_name } = req.body;
 
     var reply = {};
