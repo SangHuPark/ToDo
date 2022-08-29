@@ -29,6 +29,7 @@ exports.insertUser = async (newUserInfo) => {
             return result;
         })
         .catch((err) => { // 회원 가입 실패 시
+            console.log(err);
             throw new Error(err);
         });
 
