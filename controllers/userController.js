@@ -47,7 +47,7 @@ exports.duplicateCheck = async (req, res) => {
         try {
             var enrollIdCheck = await userService.existIdCheck(user_id);
             if(enrollIdCheck) 
-                return res.json(util.makeReply(reply, false, 301, '이미 사용 중인 아이디입니다.')); 
+                return res.json(util.makeReply(reply, false, 301, '이미 사용 중인 아이디입니다.'));
         
             return res.json(util.makeReply(reply, true, 200, '사용 가능한 아이디입니다.'));
         } catch (err) {
